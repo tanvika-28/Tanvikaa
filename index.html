@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanvika Padole | Cybersecurity & Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .progress-90 { --progress: 90%; }
+        .progress-85 { --progress: 85%; }
+        .progress-100 { --progress: 100%; }
+        .delay-05s { animation-delay: 0.2s; }
+        .delay-1s { animation-delay: 0.4s; }
+        .delay-15s { animation-delay: 0.6s; }
+        .delay-2s { animation-delay: 0.8s; }
+        .delay-25s { animation-delay: 1s; }
+        .delay-3s { animation-delay: 1.2s; }
+        .delay-35s { animation-delay: 1.4s; }
+        .delay-4s { animation-delay: 1.6s; }
+        .delay-45s { animation-delay: 1.8s; }
+        .anim-duration-4s { animation-duration: 1.5s; }
+        .anim-duration-5s { animation-duration: 2s; }
+        .anim-duration-6s { animation-duration: 2.5s; }
+        .anim-duration-7s { animation-duration: 3s; }
+        .transition-delay-01s { transition-delay: 0.1s; }
+        .transition-delay-02s { transition-delay: 0.2s; }
+        .transition-delay-03s { transition-delay: 0.3s; }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-200 font-sans overflow-x-hidden">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Matrix Canvas Background -->
+    <canvas id="matrixCanvas" class="fixed top-0 left-0 w-full h-full opacity-5 pointer-events-none z-0"></canvas>
+
+    <!-- Particle Network Canvas -->
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-emerald-500/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold font-mono text-emerald-400 hover:text-emerald-300 transition-colors nav-brand">
+                &lt;Tanvika /&gt;
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">Home</a>
+                <a href="#about"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">About</a>
+                <a href="#skills"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">Skills</a>
+                <a href="#education"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">Education</a>
+                <a href="#experience"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">Experience</a>
+                <a href="#achievements"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">Achievements</a>
+                <a href="#social-proof"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">Social Proof</a>
+                <a href="#projects"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">Projects</a>
+                <a href="#contact"
+                    class="nav-link text-slate-300 hover:text-emerald-400 transition-colors font-mono text-sm">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-emerald-400 hover:text-emerald-300" aria-label="Toggle menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-b border-emerald-500/20">
+            <div class="flex flex-col px-6 py-4 space-y-4">
+                <a href="#home" class="text-slate-300 hover:text-emerald-400 font-mono">Home</a>
+                <a href="#about" class="text-slate-300 hover:text-emerald-400 font-mono">About</a>
+                <a href="#skills" class="text-slate-300 hover:text-emerald-400 font-mono">Skills</a>
+                <a href="#education" class="text-slate-300 hover:text-emerald-400 font-mono">Education</a>
+                <a href="#experience" class="text-slate-300 hover:text-emerald-400 font-mono">Experience</a>
+                <a href="#achievements" class="text-slate-300 hover:text-emerald-400 font-mono">Achievements</a>
+                <a href="#social-proof" class="text-slate-300 hover:text-emerald-400 font-mono">Social Proof</a>
+                <a href="#projects" class="text-slate-300 hover:text-emerald-400 font-mono">Projects</a>
+                <a href="#contact" class="text-slate-300 hover:text-emerald-400 font-mono">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative z-10 pt-20">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1 space-y-6">
+                <div
+                    class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>System Secure</span>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight hero-title">
+                    Hi, I'm <span
+                        class="glitch-text text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400"
+                        data-text="Tanvika">Tanvika</span>
+                </h1>
+
+                <div class="h-8 md:h-12 hero-subtitle">
+                    <span id="typewriter" class="text-xl md:text-2xl text-slate-400 font-mono"></span>
+                    <span class="terminal-cursor"></span>
+                </div>
+
+                <p class="text-slate-400 text-lg max-w-lg leading-relaxed hero-description">
+                    Cybersecurity Enthusiast & Full Stack Developer passionate about securing digital assets and
+                    building robust web applications.
+                </p>
+
+                <div class="flex flex-wrap gap-4 pt-4 hero-buttons">
+                    <a href="#contact"
+                        class="group px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-lg transition-all transform hover:scale-105 flex items-center gap-2">
+                        <i data-lucide="terminal" class="w-5 h-5"></i>
+                        <span>Contact Me</span>
+                    </a>
+                    <a href="#"
+                        class="px-8 py-3 border-2 border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 font-bold rounded-lg transition-all flex items-center gap-2">
+                        <i data-lucide="download" class="w-5 h-5"></i>
+                        <span>Download Resume</span>
+                    </a>
+                </div>
+
+                <div class="flex gap-4 pt-6 social-links">
+                    <a href="#" class="text-slate-400 hover:text-emerald-400 transition-colors" title="GitHub">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-emerald-400 transition-colors" title="LinkedIn">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-emerald-400 transition-colors" title="Twitter">
+                        <i data-lucide="twitter" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-emerald-400 transition-colors" title="Email">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="order-1 md:order-2 flex justify-center">
+                <div class="relative floating">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full blur opacity-30 pulse-glow">
+                    </div>
+                    <div
+                        class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-emerald-500/30 bg-slate-900 holographic profile-image">
+                        <img src="Tanvika tai.png" alt="Tanvika Padole"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <!-- Floating badges -->
+                    <div
+                        class="absolute -right-4 top-10 bg-slate-800/90 backdrop-blur border border-emerald-500/30 p-3 rounded-lg shadow-xl floating floating-delay-1 shield-pulse floating-badge-right">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-emerald-400"></i>
+                    </div>
+                    <div
+                        class="absolute -left-4 bottom-10 bg-slate-800/90 backdrop-blur border border-cyan-500/30 p-3 rounded-lg shadow-xl floating floating-delay-2 floating-badge-left">
+                        <i data-lucide="code-2" class="w-8 h-8 text-cyan-400"></i>
+                    </div>
+                    <div
+                        class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-slate-800/90 backdrop-blur border border-purple-500/30 px-3 py-1 rounded-full shadow-xl floating floating-delay-3 floating-badge-top">
+                        <span class="text-xs font-mono text-purple-400">Full Stack</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative z-10 circuit-bg">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center gap-4 mb-12 stagger-reveal section-header">
+                <div class="h-px bg-emerald-500/30 flex-1"></div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white font-mono neon-flicker section-title">
+                    <span class="text-emerald-400">></span> About Me
+                </h2>
+                <div class="h-px bg-emerald-500/30 flex-1"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto about-grid">
+                <div class="space-y-6 text-slate-300 leading-relaxed">
+                    <div class="bg-slate-900/50 border border-emerald-500/20 rounded-lg p-6 backdrop-blur-sm">
+                        <p class="mb-4">
+                            Hello! I'm <span class="text-emerald-400 font-semibold">Tanvika Padole</span>, a
+                            cybersecurity enthusiast and full-stack developer dedicated to creating secure, scalable
+                            digital solutions.
+                        </p>
+                        <p class="mb-4">
+                            My journey began with a fascination for understanding how systems work and how to protect
+                            them. Today, I combine my expertise in ethical hacking and penetration testing with modern
+                            web development to build applications that are both powerful and secure.
+                        </p>
+                        <p>
+                            When I'm not hunting bugs or writing code, you'll find me exploring new security
+                            vulnerabilities, contributing to open-source security tools, or mentoring aspiring
+                            developers in secure coding practices.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 stagger-reveal about-stats">
+                        <div
+                            class="text-center p-4 bg-slate-800/50 rounded-lg border border-emerald-500/20 hover:border-emerald-500/50 transition-all hover:transform hover:scale-105">
+                            <div class="text-2xl font-bold text-emerald-400 mb-1 counter" data-target="3">0</div>
+                            <div class="text-xs text-slate-400 font-mono">Years Experience</div>
+                            <div class="skill-progress mt-2">
+                                <div class="skill-progress-bar progress-90"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="text-center p-4 bg-slate-800/50 rounded-lg border border-emerald-500/20 hover:border-emerald-500/50 transition-all hover:transform hover:scale-105">
+                            <div class="text-2xl font-bold text-emerald-400 mb-1 counter" data-target="50">0</div>
+                            <div class="text-xs text-slate-400 font-mono">Projects Secured</div>
+                            <div class="skill-progress mt-2">
+                                <div class="skill-progress-bar progress-85"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="text-center p-4 bg-slate-800/50 rounded-lg border border-emerald-500/20 hover:border-emerald-500/50 transition-all hover:transform hover:scale-105">
+                            <div class="text-2xl font-bold text-emerald-400 mb-1">100%</div>
+                            <div class="text-xs text-slate-400 font-mono">Commitment</div>
+                            <div class="skill-progress mt-2">
+                                <div class="skill-progress-bar progress-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="bg-slate-900 border border-emerald-500/30 rounded-lg p-6 font-mono text-sm shadow-2xl">
+                        <div class="flex items-center gap-2 mb-4 border-b border-emerald-500/20 pb-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="ml-2 text-slate-500">tanvika@portfolio:~</span>
+                        </div>
+                        <div class="space-y-2 text-slate-300">
+                            <div class="typing-animation">
+                                <span class="text-emerald-400">$</span> whoami
+                            </div>
+                            <div class="typing-animation delay-05s">
+                                tanvika_padole
+                            </div>
+                            <div class="typing-animation delay-1s">
+                                <span class="text-emerald-400">$</span> cat interests.txt
+                            </div>
+                            <div class="typing-animation delay-15s">
+                                - Ethical Hacking
+                            </div>
+                            <div class="typing-animation delay-2s">
+                                - Full Stack Development
+                            </div>
+                            <div class="typing-animation delay-25s">
+                                - Network Security
+                            </div>
+                            <div class="typing-animation delay-3s">
+                                <span class="text-emerald-400">$</span> sudo apt-get install passion
+                            </div>
+                            <div class="typing-animation delay-35s">
+                                <span class="text-yellow-400">[sudo]</span> password for tanvika: ********
+                            </div>
+                            <div class="typing-animation delay-4s">
+                                <span class="text-green-400">✓</span> Passion installed successfully!
+                            </div>
+                            <div class="typing-animation delay-45s">
+                                <span class="text-emerald-400">$</span> <span class="animate-pulse">_</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 relative z-10 bg-slate-900/30 hexagon-bg overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-xl animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/5 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-white mb-4 scramble-text" data-value="Technical Skills">Technical Skills</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto mb-6"></div>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Mastering the art of code and security through continuous learning and hands-on experience
+                </p>
+            </div>
+
+            <!-- Skills Radar/Orbital Layout -->
+            <div class="max-w-6xl mx-auto">
+                <div class="relative">
+                    <!-- Central Hub -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                        <div class="w-32 h-32 bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 rounded-full flex items-center justify-center border-2 border-emerald-500/30 pulse-glow">
+                            <div class="text-center">
+                                <i data-lucide="cpu" class="w-8 h-8 text-emerald-400 mx-auto mb-1"></i>
+                                <span class="text-xs font-mono text-emerald-400">Core</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Orbits -->
+                    <div class="relative w-full h-96 md:h-[500px]">
+                        <!-- Inner Orbit - Languages -->
+                        <div class="absolute inset-0 animate-spin" style="animation-duration: 8s;">
+                            <div class="absolute top-8 left-1/2 transform -translate-x-1/2 skill-orb bg-emerald-500/20 border-emerald-500/50" data-skill="Python" data-level="95">
+                                <i data-lucide="code" class="w-5 h-5 text-emerald-400"></i>
+                            </div>
+                            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 skill-orb bg-cyan-500/20 border-cyan-500/50" data-skill="JavaScript" data-level="90">
+                                <i data-lucide="zap" class="w-5 h-5 text-cyan-400"></i>
+                            </div>
+                            <div class="absolute left-8 top-1/2 transform -translate-y-1/2 skill-orb bg-purple-500/20 border-purple-500/50" data-skill="C/C++" data-level="85">
+                                <i data-lucide="terminal" class="w-5 h-5 text-purple-400"></i>
+                            </div>
+                            <div class="absolute right-8 top-1/2 transform -translate-y-1/2 skill-orb bg-red-500/20 border-red-500/50" data-skill="Java" data-level="80">
+                                <i data-lucide="coffee" class="w-5 h-5 text-red-400"></i>
+                            </div>
+                        </div>
+
+                        <!-- Middle Orbit - Frameworks/Tools -->
+                        <div class="absolute inset-8 animate-spin" style="animation-duration: 10s; animation-direction: reverse;">
+                            <div class="absolute top-4 left-1/2 transform -translate-x-1/2 skill-orb bg-emerald-500/15 border-emerald-500/40" data-skill="React" data-level="88">
+                                <i data-lucide="atom" class="w-4 h-4 text-emerald-400"></i>
+                            </div>
+                            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 skill-orb bg-cyan-500/15 border-cyan-500/40" data-skill="Node.js" data-level="85">
+                                <i data-lucide="server" class="w-4 h-4 text-cyan-400"></i>
+                            </div>
+                            <div class="absolute left-4 top-1/2 transform -translate-y-1/2 skill-orb bg-purple-500/15 border-purple-500/40" data-skill="Express" data-level="82">
+                                <i data-lucide="layers" class="w-4 h-4 text-purple-400"></i>
+                            </div>
+                            <div class="absolute right-4 top-1/2 transform -translate-y-1/2 skill-orb bg-red-500/15 border-red-500/40" data-skill="Next.js" data-level="78">
+                                <i data-lucide="triangle" class="w-4 h-4 text-red-400"></i>
+                            </div>
+                        </div>
+
+                        <!-- Outer Orbit - Security Tools -->
+                        <div class="absolute inset-16 animate-spin" style="animation-duration: 12s;">
+                            <div class="absolute top-2 left-1/2 transform -translate-x-1/2 skill-orb bg-red-500/10 border-red-500/30" data-skill="Kali Linux" data-level="90">
+                                <i data-lucide="shield" class="w-4 h-4 text-red-400"></i>
+                            </div>
+                            <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 skill-orb bg-orange-500/10 border-orange-500/30" data-skill="Burp Suite" data-level="85">
+                                <i data-lucide="bug" class="w-4 h-4 text-orange-400"></i>
+                            </div>
+                            <div class="absolute left-2 top-1/2 transform -translate-y-1/2 skill-orb bg-yellow-500/10 border-yellow-500/30" data-skill="Wireshark" data-level="88">
+                                <i data-lucide="network" class="w-4 h-4 text-yellow-400"></i>
+                            </div>
+                            <div class="absolute right-2 top-1/2 transform -translate-y-1/2 skill-orb bg-pink-500/10 border-pink-500/30" data-skill="Metasploit" data-level="80">
+                                <i data-lucide="target" class="w-4 h-4 text-pink-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Details Cards -->
+                <div class="grid md:grid-cols-3 gap-6 mt-16 skills-grid">
+                    <!-- Programming Languages -->
+                    <div class="skill-detail-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 stagger-reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg">
+                                <i data-lucide="code" class="w-6 h-6 text-emerald-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white font-mono">Languages</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">Python</span>
+                                    <span class="text-emerald-400 text-sm font-mono">95%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">JavaScript</span>
+                                    <span class="text-emerald-400 text-sm font-mono">90%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">C/C++</span>
+                                    <span class="text-emerald-400 text-sm font-mono">85%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web Technologies -->
+                    <div class="skill-detail-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 stagger-reveal transition-delay-01s">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-cyan-500/20 rounded-lg">
+                                <i data-lucide="globe" class="w-6 h-6 text-cyan-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white font-mono">Web Tech</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">React</span>
+                                    <span class="text-cyan-400 text-sm font-mono">88%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">Node.js</span>
+                                    <span class="text-cyan-400 text-sm font-mono">85%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">HTML/CSS</span>
+                                    <span class="text-cyan-400 text-sm font-mono">95%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security & Tools -->
+                    <div class="skill-detail-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all duration-300 stagger-reveal transition-delay-02s">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-red-500/20 rounded-lg">
+                                <i data-lucide="shield" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white font-mono">Security</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">Ethical Hacking</span>
+                                    <span class="text-red-400 text-sm font-mono">90%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">Pen Testing</span>
+                                    <span class="text-red-400 text-sm font-mono">85%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-slate-300 text-sm">Network Security</span>
+                                    <span class="text-red-400 text-sm font-mono">88%</span>
+                                </div>
+                                <div class="skill-progress">
+                                    <div class="skill-progress-bar" style="--progress: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Tooltip -->
+                <div id="skill-tooltip" class="fixed bg-slate-800 text-white px-3 py-2 rounded-lg shadow-lg pointer-events-none opacity-0 transition-opacity duration-200 z-50 font-mono text-sm">
+                    <div class="font-bold" id="skill-name"></div>
+                    <div class="text-emerald-400" id="skill-level"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 relative z-10 bg-slate-900/20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-white mb-4 scramble-text" data-value="Education">Education</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto mb-6"></div>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Building a strong foundation in computer science and cybersecurity through academic excellence
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Education Timeline -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-400 via-cyan-400 to-purple-400"></div>
+
+                    <!-- Education Items -->
+                    <div class="space-y-12">
+                        <!-- Current Degree -->
+                        <div class="relative flex items-start gap-8 stagger-reveal">
+                            <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg pulse-glow">
+                                <i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="flex-1 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <h3 class="text-2xl font-bold text-white font-mono">B.Tech Computer Science</h3>
+                                    <span class="text-emerald-400 font-mono text-sm bg-emerald-500/10 px-3 py-1 rounded-full mt-2 md:mt-0">2022 - 2026</span>
+                                </div>
+                                <p class="text-slate-300 text-lg mb-2">St. Vincent Pallotti College of Engineering and Technology, Nagpur</p>
+                                <p class="text-slate-400 mb-4">Specialized in Cybersecurity</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">CGPA: 9.2/10</span>
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Higher Secondary -->
+                        <div class="relative flex items-start gap-8 stagger-reveal transition-delay-01s">
+                            <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i data-lucide="school" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="flex-1 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <h3 class="text-2xl font-bold text-white font-mono">Higher Secondary (12th)</h3>
+                                    <span class="text-cyan-400 font-mono text-sm bg-cyan-500/10 px-3 py-1 rounded-full mt-2 md:mt-0">2019 - 2021</span>
+                                </div>
+                                <p class="text-slate-300 text-lg mb-2">Sanskar Junior College, WCL, Umred, Nagpur - 73.0%</p>
+                                <p class="text-slate-400 mb-4">Computer Science</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Percentage:73.0%</span>
+                                
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary School -->
+                        <div class="relative flex items-start gap-8 stagger-reveal transition-delay-02s">
+                            <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i data-lucide="book-open" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="flex-1 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <h3 class="text-2xl font-bold text-white font-mono">Secondary School (10th)</h3>
+                                    <span class="text-purple-400 font-mono text-sm bg-purple-500/10 px-3 py-1 rounded-full mt-2 md:mt-0">2018 - 2019</span>
+                                </div>
+                                <p class="text-slate-300 text-lg mb-2">Modern High School, Nagpur </p>
+                                <p class="text-slate-400 mb-4">CBSE Board with focus on Science and Mathematics</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Percentage: 91.2%</span>
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">School Topper</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="mt-16">
+                    <h3 class="text-3xl font-bold text-white text-center mb-8 font-mono">Certifications</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="cert-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 stagger-reveal">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="cert-icon">
+                                    <i data-lucide="bar-chart-2" class="w-6 h-6 text-emerald-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold font-mono">Microsoft Applied Skills</h4>
+                                    <p class="text-slate-400 text-sm">Data Science & Machine Learning</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-400 text-sm">Hands-on experience building ML models, analyzing data, and solving real-world problems with Azure tools.</p>
+                            <span class="cert-label">Azure</span>
+                        </div>
+
+                        <div class="cert-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 stagger-reveal transition-delay-01s">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="cert-icon">
+                                    <i data-lucide="shield" class="w-6 h-6 text-cyan-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold font-mono">Tata Forage</h4>
+                                    <p class="text-slate-400 text-sm">Cyber Security Analyst Job Simulation</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-400 text-sm">Simulated real-world SOC scenarios including threat detection, analysis, and incident response.</p>
+                            <span class="cert-label">SOC Training</span>
+                        </div>
+
+                        <div class="cert-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 stagger-reveal transition-delay-02s">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="cert-icon">
+                                    <i data-lucide="code" class="w-6 h-6 text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold font-mono">NPTEL</h4>
+                                    <p class="text-slate-400 text-sm">Problem Solving in C & Cloud Computing</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-400 text-sm">Built strong foundations in C programming and cloud architecture through structured online coursework.</p>
+                            <span class="cert-label">Verified Course</span>
+                        </div>
+
+                        <div class="cert-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-orange-500/20 hover:border-orange-500/50 transition-all duration-300 stagger-reveal transition-delay-03s">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="cert-icon">
+                                    <i data-lucide="search" class="w-6 h-6 text-orange-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold font-mono">EC-Council</h4>
+                                    <p class="text-slate-400 text-sm">Digital Forensic Essentials</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-400 text-sm">Mastered forensic investigation techniques, chain-of-custody processes, and evidence handling best practices.</p>
+                            <span class="cert-label">Forensics</span>
+                        </div>
+
+                        <div class="cert-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-pink-500/20 hover:border-pink-500/50 transition-all duration-300 stagger-reveal transition-delay-04s">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="cert-icon">
+                                    <i data-lucide="cpu" class="w-6 h-6 text-pink-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold font-mono">Industrial Automation</h4>
+                                    <p class="text-slate-400 text-sm">IIoT (VR Jamdar Siemens Centre, VNIT Nagpur)</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-400 text-sm">Learned industrial IoT architectures, PLC integration, and automation best practices in a VR lab environment.</p>
+                            <span class="cert-label">IIoT / Automation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 relative z-10 bg-slate-900/30 circuit-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-white mb-4 scramble-text" data-value="Experience">Experience</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto mb-6"></div>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Professional journey in cybersecurity and software development
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Experience Timeline -->
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-400 via-orange-400 to-yellow-400"></div>
+
+                    <!-- Experience Items -->
+                    <div class="space-y-12">
+                        <!-- Cyber Cell Police Station Nagpur -->
+                        <div class="relative flex items-start gap-8 stagger-reveal">
+                            <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg pulse-glow">
+                                <i data-lucide="shield" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="flex-1 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all duration-300">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <h3 class="text-2xl font-bold text-white font-mono">Cyber Security Intern</h3>
+                                    <span class="text-red-400 font-mono text-sm bg-red-500/10 px-3 py-1 rounded-full mt-2 md:mt-0">Sep 2025 - Oct 2025</span>
+                                </div>
+                                <p class="text-slate-300 text-lg mb-2">Cyber Cell Police Station, Nagpur</p>
+                                <p class="text-slate-400 mb-4">Handled public cyber complaints related to online fraud, social media harassment, and data breaches under police supervision.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Incident Response</span>
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Digital Forensics</span>
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Cybercrime Reporting</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CFSS Internship -->
+                        <div class="relative flex items-start gap-8 stagger-reveal transition-delay-01s">
+                            <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i data-lucide="shield-alert" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="flex-1 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-orange-500/20 hover:border-orange-500/50 transition-all duration-300">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <h3 class="text-2xl font-bold text-white font-mono">Cybersecurity & Ethical Hacking Intern</h3>
+                                    <span class="text-orange-400 font-mono text-sm bg-orange-500/10 px-3 py-1 rounded-full mt-2 md:mt-0">Jun 2024 - Jul 2024</span>
+                                </div>
+                                <p class="text-slate-300 text-lg mb-2">CFSS, Remote</p>
+                                <p class="text-slate-400 mb-4">Simulated phishing attacks and developed incident response plans in lab environments.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Phishing Simulation</span>
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Incident Response</span>
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Security Training</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CodeAplha Internship -->
+                        <div class="relative flex items-start gap-8 stagger-reveal transition-delay-02s">
+                            <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-yellow-500 to-green-500 rounded-full flex items-center justify-center shadow-lg">
+                                <i data-lucide="terminal" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div class="flex-1 bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all duration-300">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <h3 class="text-2xl font-bold text-white font-mono">Cyber Security Intern</h3>
+                                    <span class="text-yellow-400 font-mono text-sm bg-yellow-500/10 px-3 py-1 rounded-full mt-2 md:mt-0">May 2025 - Aug 2025</span>
+                                </div>
+                                <p class="text-slate-300 text-lg mb-2">CodeAplha</p>
+                                <p class="text-slate-400 mb-4">Built security-focused Python projects, including a keylogger, packet sniffer, and password strength checker; gained hands-on experience in ethical hacking and cryptography.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Python Security</span>
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Packet Analysis</span>
+                                    <span class="px-3 py-1 bg-slate-700 text-slate-300 rounded-full text-sm font-mono">Cryptography</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px bg-emerald-500/30 flex-1"></div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white font-mono">
+                    <span class="text-emerald-400">></span> Featured Projects
+                </h2>
+                <div class="h-px bg-emerald-500/30 flex-1"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Project 1: AscendAI -->
+                <div
+                    class="project-card group relative bg-slate-800 rounded-xl overflow-hidden border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 stagger-reveal holographic">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://static.photos/technology/640x360/101" alt="AscendAI"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                        <div class="absolute top-4 right-4 flex gap-2">
+                            <span
+                                class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-xs font-mono border border-emerald-500/30">AI</span>
+                            <span
+                                class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-mono border border-cyan-500/30">Next.js</span>
+                        </div>
+                    </div>
+                    <div class="p-6 project-card-inner">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors scramble-text"
+                            data-value="AscendAI">AscendAI</h3>
+                        <p class="text-slate-400 mb-4 text-sm leading-relaxed">
+                            Full-stack AI-powered career coach platform built with Next.js, Clerk auth, Tailwind & Shadcn UI, Prisma, and Google Gemini AI.
+                            Generates resumes, cover letters, and provides smart interview prep guidance. Deployed on Vercel with secure auth and responsive UI.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-emerald-500/20 hover:text-emerald-400 transition-colors">Next.js</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-emerald-500/20 hover:text-emerald-400 transition-colors">Tailwind</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-emerald-500/20 hover:text-emerald-400 transition-colors">Prisma</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-emerald-500/20 hover:text-emerald-400 transition-colors">Google Gemini AI</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-mono hover:translate-x-2 transition-transform">
+                                <i data-lucide="github" class="w-4 h-4"></i>
+                                <span>Source Code</span>
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-mono hover:translate-x-2 transition-transform">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                                <span>Live Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Spam & Phishing Classifier -->
+                <div class="project-card group relative bg-slate-800 rounded-xl overflow-hidden border border-red-500/20 hover:border-red-500/50 transition-all duration-300 stagger-reveal holographic transition-delay-02s">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://static.photos/technology/640x360/202" alt="Spam & Phishing Classifier"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                        <div class="absolute top-4 right-4 flex gap-2">
+                            <span
+                                class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-xs font-mono border border-red-500/30">NLP</span>
+                            <span
+                                class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-mono border border-purple-500/30">ML</span>
+                        </div>
+                    </div>
+                    <div class="p-6 project-card-inner">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors scramble-text"
+                            data-value="SpamClassifier">Spam & Phishing Classifier</h3>
+                        <p class="text-slate-400 mb-4 text-sm leading-relaxed">
+                            NLP/ML dashboard built with Streamlit, Scikit-learn, and NLTK to detect spam and phishing in email/SMS streams.
+                            Includes real-time detection, batch analysis, and interactive visualizations like word clouds and analytics.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-red-500/20 hover:text-red-400 transition-colors">Python</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-red-500/20 hover:text-red-400 transition-colors">Streamlit</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-red-500/20 hover:text-red-400 transition-colors">Scikit-learn</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-red-500/20 hover:text-red-400 transition-colors">NLTK</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-mono hover:translate-x-2 transition-transform">
+                                <i data-lucide="github" class="w-4 h-4"></i>
+                                <span>Source Code</span>
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-mono hover:translate-x-2 transition-transform">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                                <span>Live Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Penetration Testing Toolkit -->
+                <div class="project-card group relative bg-slate-800 rounded-xl overflow-hidden border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 stagger-reveal transition-delay-03s holographic">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://static.photos/technology/640x360/303" alt="Penetration Testing Toolkit"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                        <div class="absolute top-4 right-4 flex gap-2">
+                            <span
+                                class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs font-mono border border-purple-500/30">Security</span>
+                            <span
+                                class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-xs font-mono border border-indigo-500/30">Toolset</span>
+                        </div>
+                    </div>
+                    <div class="p-6 project-card-inner">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors scramble-text"
+                            data-value="Pentest Toolkit">Penetration Testing Toolkit</h3>
+                        <p class="text-slate-400 mb-4 text-sm leading-relaxed">
+                            Modular pentesting toolkit featuring a port scanner for open port detection and a brute-force module for weak credential testing. Designed for flexibility and extensibility.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-purple-500/20 hover:text-purple-400 transition-colors">Python</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-purple-500/20 hover:text-purple-400 transition-colors">Networking</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-purple-500/20 hover:text-purple-400 transition-colors">Automation</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-mono hover:translate-x-2 transition-transform">
+                                <i data-lucide="github" class="w-4 h-4"></i>
+                                <span>Source Code</span>
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-mono hover:translate-x-2 transition-transform">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                                <span>Live Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: E-commerce Website (MERN) -->
+                <div class="project-card group relative bg-slate-800 rounded-xl overflow-hidden border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 stagger-reveal holographic">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://static.photos/technology/640x360/404" alt="E-commerce MERN"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
+                        <div class="absolute top-4 right-4 flex gap-2">
+                            <span
+                                class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-mono border border-cyan-500/30">MERN</span>
+                            <span
+                                class="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-xs font-mono border border-emerald-500/30">E-commerce</span>
+                        </div>
+                    </div>
+                    <div class="p-6 project-card-inner">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors scramble-text"
+                            data-value="MERN Store">E-commerce Website (MERN)</h3>
+                        <p class="text-slate-400 mb-4 text-sm leading-relaxed">
+                            Full-stack online store with user authentication, cart management, and order processing. Built with MongoDB, Express, React, and Node, featuring responsive UX and secure checkout flows.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-cyan-500/20 hover:text-cyan-400 transition-colors">React</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-cyan-500/20 hover:text-cyan-400 transition-colors">Node.js</span>
+                            <span
+                                class="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs font-mono hover:bg-cyan-500/20 hover:text-cyan-400 transition-colors">MongoDB</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-mono hover:translate-x-2 transition-transform">
+                                <i data-lucide="github" class="w-4 h-4"></i>
+                                <span>Source Code</span>
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors text-sm font-mono hover:translate-x-2 transition-transform">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                                <span>Live Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative overflow-hidden">
+        <!-- Floating Background Elements -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="floating-blob blob-1"></div>
+            <div class="floating-blob blob-2"></div>
+            <div class="floating-blob blob-3"></div>
+            <div class="floating-blob blob-4"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-white mb-4 scramble-text" data-value="Contact Me">Contact Me</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto mb-6"></div>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    <span id="contact-typewriter" class="font-mono text-emerald-400"></span>
+                    <span class="animate-pulse">|</span>
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <!-- Contact Form -->
+                    <div class="contact-card group relative bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-500 stagger-reveal holographic">
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-cyan-500/5 rounded-xl"></div>
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                                <i data-lucide="mail" class="w-6 h-6 text-emerald-400"></i>
+                                Send Message
+                            </h3>
+
+                            <form id="contact-form" class="space-y-6">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div class="form-group">
+                                        <label for="name" class="block text-sm font-mono text-slate-400 mb-2">Name</label>
+                                        <input type="text" id="name" name="name" required
+                                            class="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 transition-all duration-300">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="block text-sm font-mono text-slate-400 mb-2">Email</label>
+                                        <input type="email" id="email" name="email" required
+                                            class="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 transition-all duration-300">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="subject" class="block text-sm font-mono text-slate-400 mb-2">Subject</label>
+                                    <input type="text" id="subject" name="subject" required
+                                        class="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 transition-all duration-300">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message" class="block text-sm font-mono text-slate-400 mb-2">Message</label>
+                                    <textarea id="message" name="message" rows="5" required
+                                        class="w-full px-4 py-3 bg-slate-900/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 transition-all duration-300 resize-none"></textarea>
+                                </div>
+
+                                <button type="submit"
+                                    class="w-full py-3 px-6 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-mono font-bold rounded-lg hover:from-emerald-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group/btn">
+                                    <i data-lucide="send" class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform"></i>
+                                    <span>Send Message</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info & Terminal -->
+                    <div class="space-y-8">
+                        <!-- Contact Info Cards -->
+                        <div class="grid gap-4">
+                            <div class="contact-info-card group relative bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 border border-slate-600 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:-rotate-1 stagger-reveal holographic">
+                                <div class="flex items-center gap-4">
+                                    <div class="p-3 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
+                                        <i data-lucide="mail" class="w-6 h-6 text-emerald-400"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-mono font-bold">Email</h4>
+                                        <p class="text-slate-400 text-sm">tanvikapadole@example.com</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-info-card group relative bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:rotate-1 stagger-reveal holographic">
+                                <div class="flex items-center gap-4">
+                                    <div class="p-3 bg-cyan-500/10 rounded-lg group-hover:bg-cyan-500/20 transition-colors">
+                                        <i data-lucide="phone" class="w-6 h-6 text-cyan-400"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-mono font-bold">Phone</h4>
+                                        <p class="text-slate-400 text-sm">+1 (555) 123-4567</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-info-card group relative bg-slate-800/50 backdrop-blur-sm rounded-lg p-6 border border-slate-600 hover:border-purple-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:-rotate-1 stagger-reveal holographic">
+                                <div class="flex items-center gap-4">
+                                    <div class="p-3 bg-purple-500/10 rounded-lg group-hover:bg-purple-500/20 transition-colors">
+                                        <i data-lucide="map-pin" class="w-6 h-6 text-purple-400"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-mono font-bold">Location</h4>
+                                        <p class="text-slate-400 text-sm">Mumbai, India</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Interface -->
+                        <div class="terminal-card group relative bg-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-500/50 transition-all duration-500 stagger-reveal holographic">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="flex gap-2">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                                <span class="text-slate-400 text-sm font-mono">contact-terminal</span>
+                            </div>
+
+                            <div id="terminal-output" class="font-mono text-sm text-emerald-400 mb-4 min-h-[120px] overflow-y-auto">
+                                <div class="mb-2">Welcome to Tanvika's Contact Terminal</div>
+                                <div class="mb-2">Type 'help' for available commands</div>
+                                <div class="text-cyan-400">tanvika@contact:~$ <span class="animate-pulse">_</span></div>
+                            </div>
+
+                            <div class="flex gap-2">
+                                <input type="text" id="terminal-input"
+                                    class="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded text-white placeholder-slate-500 focus:border-emerald-400 focus:outline-none text-sm font-mono"
+                                    placeholder="Enter command...">
+                                <button id="terminal-submit" class="px-4 py-2 bg-emerald-500 text-white rounded hover:bg-emerald-600 transition-colors text-sm font-mono">
+                                    Execute
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="social-links-card group relative bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-600 hover:border-cyan-500/50 transition-all duration-300 stagger-reveal holographic">
+                            <h4 class="text-white font-mono font-bold mb-4 flex items-center gap-2">
+                                <i data-lucide="link" class="w-5 h-5 text-cyan-400"></i>
+                                Connect With Me
+                            </h4>
+                            <div class="flex gap-4">
+                                <a href="#" class="social-link p-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 group/link">
+                                    <i data-lucide="github" class="w-6 h-6 text-slate-300 group-hover/link:text-white transition-colors"></i>
+                                </a>
+                                <a href="#" class="social-link p-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 group/link">
+                                    <i data-lucide="linkedin" class="w-6 h-6 text-slate-300 group-hover/link:text-white transition-colors"></i>
+                                </a>
+                                <a href="#" class="social-link p-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 group/link">
+                                    <i data-lucide="twitter" class="w-6 h-6 text-slate-300 group-hover/link:text-white transition-colors"></i>
+                                </a>
+                                <a href="#" class="social-link p-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 group/link">
+                                    <i data-lucide="instagram" class="w-6 h-6 text-slate-300 group-hover/link:text-white transition-colors"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements & Awards Section -->
+    <section id="achievements" class="py-20 relative z-10 bg-slate-900/30 hexagon-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-white mb-4 scramble-text" data-value="Achievements">Achievements</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto mb-6"></div>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Recognition and accomplishments in cybersecurity, development, and competitive programming
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <!-- Achievement Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                    <div class="stat-card text-center bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 stagger-reveal">
+                        <div class="text-4xl font-bold text-emerald-400 mb-2" data-target="15">0</div>
+                        <p class="text-slate-300 font-mono">CTF Competitions</p>
+                        <p class="text-slate-400 text-sm">Participated & Ranked</p>
+                    </div>
+                    <div class="stat-card text-center bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 stagger-reveal transition-delay-01s">
+                        <div class="text-4xl font-bold text-cyan-400 mb-2" data-target="8">0</div>
+                        <p class="text-slate-300 font-mono">Hackathons</p>
+                        <p class="text-slate-400 text-sm">Won & Participated</p>
+                    </div>
+                    <div class="stat-card text-center bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 stagger-reveal transition-delay-02s">
+                        <div class="text-4xl font-bold text-purple-400 mb-2" data-target="25">0</div>
+                        <p class="text-slate-300 font-mono">Projects</p>
+                        <p class="text-slate-400 text-sm">Completed</p>
+                    </div>
+                    <div class="stat-card text-center bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all duration-300 stagger-reveal transition-delay-03s">
+                        <div class="text-4xl font-bold text-red-400 mb-2" data-target="50">0</div>
+                        <p class="text-slate-300 font-mono">Vulnerabilities</p>
+                        <p class="text-slate-400 text-sm">Found & Reported</p>
+                    </div>
+                </div>
+
+                <!-- Achievement Cards -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- CTF Achievement -->
+                    <div class="achievement-card group bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 stagger-reveal">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 bg-emerald-500/20 rounded-lg group-hover:bg-emerald-500/30 transition-colors">
+                                <i data-lucide="trophy" class="w-8 h-8 text-emerald-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white font-mono">CTF Champion</h3>
+                                <p class="text-emerald-400 text-sm font-mono">2024 National Cyber Security Challenge</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Secured 1st position in the national cybersecurity competition, demonstrating advanced penetration testing and cryptography skills.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-500 text-xs">March 2024</span>
+                            <span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded text-xs font-mono">Gold Medal</span>
+                        </div>
+                    </div>
+
+                    <!-- Hackathon Achievement -->
+                    <div class="achievement-card group bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 stagger-reveal transition-delay-01s">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 bg-cyan-500/20 rounded-lg group-hover:bg-cyan-500/30 transition-colors">
+                                <i data-lucide="zap" class="w-8 h-8 text-cyan-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white font-mono">Hackathon Winner</h3>
+                                <p class="text-cyan-400 text-sm font-mono">Smart India Hackathon 2024</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Led a team to victory in the prestigious Smart India Hackathon, developing an innovative cybersecurity solution for government systems.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-500 text-xs">January 2024</span>
+                            <span class="px-2 py-1 bg-cyan-500/20 text-cyan-400 rounded text-xs font-mono">Winner</span>
+                        </div>
+                    </div>
+
+                    <!-- Bug Bounty Achievement -->
+                    <div class="achievement-card group bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 stagger-reveal transition-delay-02s">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 bg-purple-500/20 rounded-lg group-hover:bg-purple-500/30 transition-colors">
+                                <i data-lucide="bug" class="w-8 h-8 text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white font-mono">Bug Bounty Hunter</h3>
+                                <p class="text-purple-400 text-sm font-mono">HackerOne & Bugcrowd</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Successfully identified and reported 50+ high-severity vulnerabilities across various platforms, earning recognition from leading companies.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-500 text-xs">2023-2024</span>
+                            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 rounded text-xs font-mono">$15K+ Earned</span>
+                        </div>
+                    </div>
+
+                    <!-- Academic Achievement -->
+                    <div class="achievement-card group bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all duration-300 stagger-reveal transition-delay-03s">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 bg-red-500/20 rounded-lg group-hover:bg-red-500/30 transition-colors">
+                                <i data-lucide="graduation-cap" class="w-8 h-8 text-red-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white font-mono">Academic Excellence</h3>
+                                <p class="text-red-400 text-sm font-mono">University Merit Scholarship</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Awarded merit scholarship for maintaining exceptional academic performance and contributing to cybersecurity research projects.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-500 text-xs">2023-2024</span>
+                            <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-mono">Full Scholarship</span>
+                        </div>
+                    </div>
+
+                    <!-- Open Source Contribution -->
+                    <div class="achievement-card group bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all duration-300 stagger-reveal">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 bg-yellow-500/20 rounded-lg group-hover:bg-yellow-500/30 transition-colors">
+                                <i data-lucide="github" class="w-8 h-8 text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white font-mono">Open Source Hero</h3>
+                                <p class="text-yellow-400 text-sm font-mono">Top Contributor</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Recognized as a top contributor to open-source cybersecurity projects, with 500+ commits and 50+ pull requests merged.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-500 text-xs">2023-2024</span>
+                            <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded text-xs font-mono">50+ PRs</span>
+                        </div>
+                    </div>
+
+                    <!-- Certification Achievement -->
+                    <div class="achievement-card group bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all duration-300 stagger-reveal transition-delay-01s">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="p-3 bg-green-500/20 rounded-lg group-hover:bg-green-500/30 transition-colors">
+                                <i data-lucide="award" class="w-8 h-8 text-green-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white font-mono">Certified Expert</h3>
+                                <p class="text-green-400 text-sm font-mono">Multiple Certifications</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 text-sm mb-3">Achieved 8 professional certifications including OSCP, CISSP, and various AWS certifications within 2 years.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-500 text-xs">2022-2024</span>
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs font-mono">8 Certifications</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section id="social-proof" class="py-20 relative z-10 bg-slate-900/20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-white mb-4 scramble-text" data-value="Social Proof">Social Proof</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 mx-auto mb-6"></div>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    GitHub contributions, coding activity, and community engagement
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <!-- GitHub Stats -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <div class="github-stat bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-emerald-500/20 text-center hover:border-emerald-500/50 transition-all duration-300 stagger-reveal">
+                        <div class="text-3xl font-bold text-emerald-400 mb-2" data-target="500">0</div>
+                        <p class="text-slate-300 font-mono">Commits</p>
+                        <p class="text-slate-400 text-sm">This Year</p>
+                    </div>
+                    <div class="github-stat bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20 text-center hover:border-cyan-500/50 transition-all duration-300 stagger-reveal transition-delay-01s">
+                        <div class="text-3xl font-bold text-cyan-400 mb-2" data-target="25">0</div>
+                        <p class="text-slate-300 font-mono">Repositories</p>
+                        <p class="text-slate-400 text-sm">Created</p>
+                    </div>
+                    <div class="github-stat bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 text-center hover:border-purple-500/50 transition-all duration-300 stagger-reveal transition-delay-02s">
+                        <div class="text-3xl font-bold text-purple-400 mb-2" data-target="150">0</div>
+                        <p class="text-slate-300 font-mono">Stars</p>
+                        <p class="text-slate-400 text-sm">Received</p>
+                    </div>
+                    <div class="github-stat bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-red-500/20 text-center hover:border-red-500/50 transition-all duration-300 stagger-reveal transition-delay-03s">
+                        <div class="text-3xl font-bold text-red-400 mb-2" data-target="89">0</div>
+                        <p class="text-slate-300 font-mono">Followers</p>
+                        <p class="text-slate-400 text-sm">GitHub</p>
+                    </div>
+                </div>
+
+                <!-- GitHub Contribution Graph Placeholder -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-600 mb-8">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center font-mono">GitHub Contribution Activity</h3>
+                    <div class="text-center">
+                        <div class="inline-block p-8 bg-slate-900/50 rounded-lg border border-slate-600">
+                            <i data-lucide="github" class="w-16 h-16 text-slate-400 mx-auto mb-4"></i>
+                            <p class="text-slate-400 font-mono">GitHub contribution graph would be displayed here</p>
+                            <p class="text-slate-500 text-sm mt-2">Integration with GitHub API for real-time stats</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coding Activity -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="activity-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 stagger-reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-emerald-500/20 rounded-lg">
+                                <i data-lucide="code" class="w-6 h-6 text-emerald-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white font-mono">Languages</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300 text-sm">Python</span>
+                                <span class="text-emerald-400 text-sm">45%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300 text-sm">JavaScript</span>
+                                <span class="text-emerald-400 text-sm">30%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300 text-sm">C/C++</span>
+                                <span class="text-emerald-400 text-sm">15%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300 text-sm">Other</span>
+                                <span class="text-emerald-400 text-sm">10%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 stagger-reveal transition-delay-01s">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-cyan-500/20 rounded-lg">
+                                <i data-lucide="activity" class="w-6 h-6 text-cyan-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white font-mono">Activity</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-300 text-sm">This Week</span>
+                                <div class="flex items-center gap-1">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <span class="text-green-400 text-sm">Active</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-300 text-sm">Longest Streak</span>
+                                <span class="text-cyan-400 text-sm font-mono">47 days</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-300 text-sm">Avg. per Day</span>
+                                <span class="text-cyan-400 text-sm font-mono">3.2 commits</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="activity-card bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 stagger-reveal transition-delay-02s">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-purple-500/20 rounded-lg">
+                                <i data-lucide="users" class="w-6 h-6 text-purple-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white font-mono">Community</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-300 text-sm">Issues Opened</span>
+                                <span class="text-purple-400 text-sm font-mono">127</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-300 text-sm">PRs Merged</span>
+                                <span class="text-purple-400 text-sm font-mono">89</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-slate-300 text-sm">Discussions</span>
+                                <span class="text-purple-400 text-sm font-mono">34</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Performance Monitoring -->
+    <div id="performance-monitor" class="fixed bottom-4 left-4 bg-slate-800/90 backdrop-blur-sm rounded-lg p-3 border border-slate-600 text-xs font-mono text-slate-300 z-50">
+        <div class="flex items-center gap-2 mb-1">
+            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span>FPS: <span id="fps-counter">60</span></span>
+        </div>
+        <div>Load: <span id="load-time">0.0s</span></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-4 right-4 bg-emerald-500 hover:bg-emerald-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform opacity-0 translate-y-4 z-50">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-emerald-500/20 relative z-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-slate-500 font-mono text-sm">
+                <span class="text-emerald-400">&lt;/&gt;</span> with <span class="text-red-400">♥</span> by Tanvika
+                Padole | © <span id="footer-year">2024</span> All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
